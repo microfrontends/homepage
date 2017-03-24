@@ -5,31 +5,8 @@
     <title>Microfrontends Homepage</title>
   </head>
   <body>
-    <div class="load-app" data-url="header"></div>
-    <div class="load-app" data-url="products-list"></div>
-    <div class="load-app" data-url="cart"></div>
-    <script>
-      function loadPage (element) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var app = new DOMParser().parseFromString(xmlHttp.responseText, 'text/html');
-            element.appendChild(app.querySelector('body'));
-
-            /* More info: http://stackoverflow.com/questions/22945884/domparser-appending-script-tags-to-head-body-but-not-executing#22997909 */
-            [].forEach.call(element.querySelectorAll('script'), function (nonExecutableScript) {
-              var script = document.createElement("script");
-              script.setAttribute("src", nonExecutableScript.src);
-              script.setAttribute("type", "text/javascript");
-              element.appendChild(script);
-              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
-            });
-          }
-        };
-        xmlHttp.open("GET", element.dataset.url, true);
-        xmlHttp.send(null);
-      }
-      document.querySelectorAll('.load-app').forEach(loadPage);
-    </script>
+    <%- header %>
+    <%- productsList %>
+    <%- cart %>
   </body>
 </html>
