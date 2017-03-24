@@ -5,8 +5,20 @@
     <title>Microfrontends Homepage</title>
   </head>
   <body>
-    <iframe frameBorder="0" width="100%" height="200" src="https://microfrontends-header.herokuapp.com/"></iframe>
-    <iframe frameBorder="0" width="100%" height="200" src="https://microfrontends-products-list.herokuapp.com/"></iframe>
-    <iframe frameBorder="0" width="100%" height="200" src="https://microfrontends-cart.herokuapp.com/"></iframe>
+    <div class="load-app" data-url="header"></div>
+    <div class="load-app" data-url="products-list"></div>
+    <div class="load-app" data-url="cart"></div>
+    <script>
+      function loadPage (element) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            element.innerHTML = xmlHttp.responseText;
+        };
+        xmlHttp.open("GET", element.dataset.url, true);
+        xmlHttp.send(null);
+      }
+      document.querySelectorAll('.load-app').forEach(loadPage);
+    </script>
   </body>
 </html>
