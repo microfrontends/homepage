@@ -11,6 +11,7 @@
   "dependencies": {
     "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "http-proxy-middleware": "^0.17.4",
     "request": "^2.81.0"
   }
 }
