@@ -6,7 +6,7 @@ const proxy = require('http-proxy-middleware');
 server.set('view engine', 'ejs');
 
 const createProxy = (path, target) =>
-  server.use(path, proxy({ target, changeOrigin: true, ignorePath: true }));
+  server.use(path, proxy({ target, changeOrigin: true, pathRewrite: {[`^${path}`]: ''} }));
 
 createProxy('/header', 'https://microfrontends-header.herokuapp.com/');
 createProxy('/products-list', 'https://microfrontends-products-list.herokuapp.com/');
